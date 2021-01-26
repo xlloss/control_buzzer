@@ -333,7 +333,8 @@ int main(int argc, char** argv)
     return 0;
 }
 #else
-
+#define PWM_PORT 0
+#define PWM_CHANNEL 0
 void set_pwm(int freq, int duty)
 {
 	struct sys_pwm control_pwm;
@@ -342,8 +343,8 @@ void set_pwm(int freq, int duty)
 	int period, ret;
 
 	printf("%s-freq %d\n", __func__, freq);
-    control_pwm.port = 2;
-    control_pwm.channel = 0;
+    control_pwm.port = PWM_PORT;
+    control_pwm.channel = PWM_CHANNEL;
     control_pwm.con_buf = &pwm_con_buf[0];
 
     sprintf(pwm_path, "%s%d/pwm%d", DEVF,
@@ -376,8 +377,8 @@ void enable_buzzer(int enable)
 	char pwm_path[50];
 	int period, ret;
 
-    control_pwm.port = 2;
-    control_pwm.channel = 0;
+    control_pwm.port = PWM_PORT;
+    control_pwm.channel = PWM_CHANNEL;
     control_pwm.con_buf = &pwm_con_buf[0];
 
     sprintf(pwm_path, "%s%d/pwm%d", DEVF,
